@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Antrian</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- === NAVIGATION === -->
+  <nav>
+    <div class="logo">Antree</div>
+    <div class="hamburger" id="hamburger">&#9776;</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#daftar-antri">Daftar Antri</a>
+      <a href="#daftar">Daftar</a>
+    </div>
+  </nav>
+
+  <!-- === MAIN CONTENT === -->
+  <div class="container" id="home">
+    <h2>Booking Antrian</h2>
+    <form id="bookingForm">
+      <label for="nama">Nama:</label>
+      <input type="text" id="nama" required>
+
+      <label for="layanan">Pilih Layanan:</label>
+      <select id="layanan" required>
+        <option value="">-- Pilih --</option>
+        <option value="Konsultasi">Konsultasi</option>
+        <option value="Pembayaran">Pembayaran</option>
+        <option value="Pengambilan">Pengambilan</option>
+      </select>
+
+
+      <label for="waktu">Waktu Booking:</label>
+      <input type="datetime-local" id="waktu" required>
+
+      <button type="submit">Ambil Antrian</button>
+    </form>
+
+    <h3 id="daftar-antri">Daftar Antrian</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Layanan</th>
+          <th>Waktu Booking</th>
+        </tr>
+      </thead>
+      <tbody id="daftarAntrian"></tbody>
+    </table>
+  </div>
+
+  <!-- === REGISTRASI PAGE MOCKUP === -->
+  <div class="container" id="daftar">
+    <h2>Form Registrasi</h2>
+    <p style="text-align:center;">(Halaman ini bisa diisi sesuai kebutuhan Anda)</p>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.style.display = navLinks.style.display === "flex" ? "none" : "flex";
+    });
+
+    const form = document.getElementById("bookingForm");
+    const daftarAntrian = document.getElementById("daftarAntrian");
+    let nomorAntrian = 1;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nama = document.getElementById("nama").value;
+      const layanan = document.getElementById("layanan").value;
+      const waktu = document.getElementById("waktu").value;
+
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${nomorAntrian++}</td>
+        <td>${nama}</td>
+        <td>${layanan}</td>
+        <td>${new Date(waktu).toLocaleString('id-ID')}</td>
+      `;
+      daftarAntrian.appendChild(row);
+
+      form.reset();
+    });
+  </script>
+</body>
+
+</html>
